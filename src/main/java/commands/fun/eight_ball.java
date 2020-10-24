@@ -1,11 +1,11 @@
 package commands.fun;
 
 import commandHandler.Command;
-import kong.unirest.Unirest;
 import kong.unirest.json.JSONObject;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import org.jetbrains.annotations.NotNull;
+import utils.Utils;
 
 import java.util.ArrayList;
 import java.util.regex.Matcher;
@@ -17,11 +17,8 @@ public class eight_ball extends Command {
     }
 
     @Override
-    protected void runs(@NotNull MessageReceivedEvent event, ArrayList<String> args) throws Exception {
-        JSONObject obj = Unirest.get("https://no-api-key.com/api/v1/magic8ball")
-                .asJson()
-                .getBody()
-                .getObject();
+    protected void execute(@NotNull MessageReceivedEvent event, ArrayList<String> args) {
+        JSONObject obj = new Utils().getObject("https://no-api-key.com/api/v1/magic8ball");
 
         String mainName = String.join(" ", args);
         StringBuffer buffer = new StringBuffer(mainName);

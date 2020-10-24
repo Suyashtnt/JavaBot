@@ -1,12 +1,12 @@
 package commands.misc;
 
 import commandHandler.Command;
-import kong.unirest.Unirest;
 import kong.unirest.json.JSONException;
 import kong.unirest.json.JSONObject;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import org.jetbrains.annotations.NotNull;
+import utils.Utils;
 
 import java.util.ArrayList;
 import java.util.regex.Matcher;
@@ -18,11 +18,10 @@ public class Pokedex extends Command {
     }
 
     @Override
-    protected void runs(@NotNull MessageReceivedEvent event, ArrayList<String> args) {
+    protected void execute(@NotNull MessageReceivedEvent event, ArrayList<String> args) {
 
         EmbedBuilder eb = new EmbedBuilder();
-        JSONObject httpResponse = Unirest.get("https://some-random-api.ml/pokedex?pokemon=" + args.get(0))
-                .asJson().getBody().getObject();
+        JSONObject httpResponse = new Utils().getObject("https://some-random-api.ml/pokedex?pokemon=" + args.get(0));
         String mainName = httpResponse.getString("name");
         StringBuffer buffer = new StringBuffer(mainName);
         Pattern pattern = Pattern.compile("(^|\\.)\\s*(\\w)");
@@ -62,4 +61,3 @@ public class Pokedex extends Command {
     }
 
 }
-//bot starting look in `run` if you can see it dont worry about the errors i dont want to start he logger ohno error

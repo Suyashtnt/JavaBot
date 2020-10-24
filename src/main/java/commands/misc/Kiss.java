@@ -40,7 +40,7 @@ public class Kiss extends Command {
     }
 
     @Override
-    protected void runs(@NotNull MessageReceivedEvent event, ArrayList<String> args) throws Exception {
+    protected void execute(@NotNull MessageReceivedEvent event, ArrayList<String> args) throws Exception {
         EmbedBuilder eb = new EmbedBuilder();
 
         int rand = (int) Math.floor(Math.random() * images.length);

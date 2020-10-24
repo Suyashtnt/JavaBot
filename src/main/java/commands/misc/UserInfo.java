@@ -15,7 +15,7 @@ public class UserInfo extends Command {
     }
 
     @Override
-    protected void runs(@NotNull MessageReceivedEvent event, ArrayList<String> args) throws Exception {
+    protected void execute(@NotNull MessageReceivedEvent event, ArrayList<String> args) {
         EmbedBuilder eb = new EmbedBuilder();
         OffsetDateTime time = event.getMember().getTimeBoosted();
         String nick = event.getMember().getNickname();

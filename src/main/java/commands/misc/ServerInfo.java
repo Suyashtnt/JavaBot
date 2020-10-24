@@ -14,7 +14,7 @@ public class ServerInfo extends Command {
     }
 
     @Override
-    protected void runs(@NotNull MessageReceivedEvent event, ArrayList<String> args) throws Exception {
+    protected void execute(@NotNull MessageReceivedEvent event, ArrayList<String> args) {
         EmbedBuilder eb = new EmbedBuilder();
         Guild guild = event.getGuild();
         eb

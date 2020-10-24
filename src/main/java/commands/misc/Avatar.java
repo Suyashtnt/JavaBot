@@ -18,7 +18,7 @@ public class Avatar extends Command {
     }
 
     @Override
-    protected void runs(@NotNull MessageReceivedEvent event, ArrayList<String> args) {
+    protected void execute(@NotNull MessageReceivedEvent event, ArrayList<String> args) {
         EmbedBuilder eb = new EmbedBuilder();
         eb
                 .setTitle("**" + event.getAuthor().getName() + "'s avatar**")

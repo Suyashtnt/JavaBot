@@ -12,7 +12,7 @@ public class Say extends Command {
     }
 
     @Override
-    protected void runs(@NotNull MessageReceivedEvent event, ArrayList<String> args) throws Exception {
+    protected void execute(@NotNull MessageReceivedEvent event, ArrayList<String> args) {
 
         event.getChannel().sendMessage(String.join(" ", args)).queue();
     }

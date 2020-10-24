@@ -20,7 +20,7 @@ public class Hug extends Command {
 
 
     @Override
-    protected void runs(@NotNull MessageReceivedEvent event, ArrayList<String> args) throws Exception {
+    protected void execute(@NotNull MessageReceivedEvent event, ArrayList<String> args) throws Exception {
         EmbedBuilder eb = new EmbedBuilder();
         HttpResponse<JsonNode> httpResponse = Unirest.get("https://nekos.life/api/v2/img/hug")
                 .asJson();
