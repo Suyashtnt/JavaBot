@@ -22,7 +22,7 @@ public class Help extends Command {
 	public Help(EventWaiter waiter) throws InstantiationException, IllegalAccessException, NoSuchMethodException, InvocationTargetException {
 		super(waiter);
 		for (Class<? extends Command> cmd : classes) {
-			if ((cmd.getAnnotation(CommandInfo.class).name())[0].equals("Help")) continue;
+			if ((cmd.getAnnotation(CommandInfo.class).name())[0].equals("help")) continue;
 			Constructor<? extends Command> commandConstructor = cmd.getConstructor(EventWaiter.class);
 			Command classInstance = commandConstructor.newInstance(waiter);
 			cmds.add(classInstance);

@@ -8,6 +8,8 @@ import kong.unirest.json.JSONObject;
 import net.dv8tion.jda.api.events.Event;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
+import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
@@ -37,10 +39,14 @@ public class Utils {
                 }
             });
         }, 30, TimeUnit.SECONDS, new Runnable() {
-            @Override
-            public void run() {
+	        @Override
+	        public void run() {
 
-            }
+	        }
         });
     }
+
+	public <T> T getRandomListElement(List<T> items) {
+		return items.get(ThreadLocalRandom.current().nextInt(items.size()));
+	}
 }

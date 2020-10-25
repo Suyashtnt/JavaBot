@@ -14,19 +14,19 @@ import java.util.ArrayList;
 @CommandInfo(name = "dog", description = "get a dog image and a fact", usage = "dog")
 public class Dog extends Command {
 
-    public Dog(EventWaiter waiter) {
-        super(waiter);
-    }
+	public Dog(EventWaiter waiter) {
+		super(waiter);
+	}
 
-    @Override
-    protected void execute(@NotNull MessageReceivedEvent event, ArrayList<String> args) {
-        JSONObject obj = new Utils().getObject("https://no-api-key.com/api/v1/animals/dog");
-        EmbedBuilder eb = new EmbedBuilder();
-        eb
-                .setTitle("dog " + new String(Character.toChars(0x1F436)))
-                .setDescription("fact: " + obj.getString("fact"))
-                .setImage(obj.getString("image"))
-                .setColor(0x6df7ff);
-        event.getChannel().sendMessage(eb.build()).queue();
-    }
+	@Override
+	protected void execute(@NotNull MessageReceivedEvent event, ArrayList<String> args) {
+		JSONObject obj = new Utils().getObject("https://no-api-key.com/api/v1/animals/dog");
+		EmbedBuilder eb = new EmbedBuilder();
+		eb
+				.setTitle("dog " + new String(Character.toChars(0x1F436)))
+				.setDescription("fact: " + obj.getString("fact"))
+				.setImage(obj.getString("image"))
+				.setColor(0x6df7ff);
+		event.getChannel().sendMessage(eb.build()).queue();
+	}
 }

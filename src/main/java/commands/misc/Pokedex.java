@@ -17,51 +17,51 @@ import java.util.regex.Pattern;
 @CommandInfo(name = "pokedex", usage = "pokedex pikachu", description = "gets a pokemon from the pokedex")
 public class Pokedex extends Command {
 
-    public Pokedex(EventWaiter waiter) {
-        super(waiter);
-    }
+	public Pokedex(EventWaiter waiter) {
+		super(waiter);
+	}
 
-    @Override
-    protected void execute(@NotNull MessageReceivedEvent event, ArrayList<String> args) {
+	@Override
+	protected void execute(@NotNull MessageReceivedEvent event, ArrayList<String> args) {
 
-        EmbedBuilder eb = new EmbedBuilder();
-        JSONObject httpResponse = new Utils().getObject("https://some-random-api.ml/pokedex?pokemon=" + args.get(0));
-        String mainName = httpResponse.getString("name");
-        StringBuffer buffer = new StringBuffer(mainName);
-        Pattern pattern = Pattern.compile("(^|\\.)\\s*(\\w)");
-        Matcher matcher = pattern.matcher(buffer);
-        while (matcher.find()) {
-            buffer.replace(matcher.end() - 1, matcher.end(), matcher.group(2).toUpperCase());
-        }
+		EmbedBuilder eb = new EmbedBuilder();
+		JSONObject httpResponse = new Utils().getObject("https://some-random-api.ml/pokedex?pokemon=" + args.get(0));
+		String mainName = httpResponse.getString("name");
+		StringBuffer buffer = new StringBuffer(mainName);
+		Pattern pattern = Pattern.compile("(^|\\.)\\s*(\\w)");
+		Matcher matcher = pattern.matcher(buffer);
+		while (matcher.find()) {
+			buffer.replace(matcher.end() - 1, matcher.end(), matcher.group(2).toUpperCase());
+		}
 
-        Object prevEvo = "n/a";
-        Object nextEvo = "n/a";
-        try {
-            prevEvo = httpResponse.getJSONObject("family").getJSONArray("evolutionLine").get(httpResponse.getJSONObject("family").getInt("evolutionStage") - 2);
+		Object prevEvo = "n/a";
+		Object nextEvo = "n/a";
+		try {
+			prevEvo = httpResponse.getJSONObject("family").getJSONArray("evolutionLine").get(httpResponse.getJSONObject("family").getInt("evolutionStage") - 2);
 
-        } catch (JSONException | IndexOutOfBoundsException ignored) {
-            System.out.println("error");
-        }
-        try {
-            nextEvo = httpResponse.getJSONObject("family").getJSONArray("evolutionLine").get(httpResponse.getJSONObject("family").getInt("evolutionStage"));
+		} catch (JSONException | IndexOutOfBoundsException ignored) {
+			System.out.println("error");
+		}
+		try {
+			nextEvo = httpResponse.getJSONObject("family").getJSONArray("evolutionLine").get(httpResponse.getJSONObject("family").getInt("evolutionStage"));
 
-        } catch (JSONException | IndexOutOfBoundsException ignored) {
-            System.out.println("error");
-        }
-        eb
-                .setTitle("**" + buffer + "**")
-                .setDescription("     *" + httpResponse.getString("description") + "*\n\n" +
-                        "          **ID:** " + httpResponse.getString("id") + "\n" +
-                        "          **Base Experience:** " + httpResponse.getString("base_experience") + "\n" +
-                        "          **Generation:** " + httpResponse.getString("generation") + "\n" +
-                        "          **Type:** " + httpResponse.getJSONArray("type").join(", ") + "\n" +
-                        "          **Weight:** " + httpResponse.getString("weight") + "\n" +
-                        "          **EggGroup:** " + httpResponse.getJSONArray("egg_groups").join(", ") + "\n" +
-                        "          **Previous evolution:** " + prevEvo + "\n" +
-                        "          **Next evolution:** " + nextEvo + "\n")
+		} catch (JSONException | IndexOutOfBoundsException ignored) {
+			System.out.println("error");
+		}
+		eb
+				.setTitle("**" + buffer + "**")
+				.setDescription("     *" + httpResponse.getString("description") + "*\n\n" +
+						"          **ID:** " + httpResponse.getString("id") + "\n" +
+						"          **Base Experience:** " + httpResponse.getString("base_experience") + "\n" +
+						"          **Generation:** " + httpResponse.getString("generation") + "\n" +
+						"          **Type:** " + httpResponse.getJSONArray("type").join(", ") + "\n" +
+						"          **Weight:** " + httpResponse.getString("weight") + "\n" +
+						"          **EggGroup:** " + httpResponse.getJSONArray("egg_groups").join(", ") + "\n" +
+						"          **Previous evolution:** " + prevEvo + "\n" +
+						"          **Next evolution:** " + nextEvo + "\n")
 
-                .setThumbnail("https://i.some-random-api.ml/pokemon/" + args.get(0) + ".gif");
-        event.getChannel().sendMessage(eb.build()).queue();
-    }
+				.setThumbnail("https://i.some-random-api.ml/pokemon/" + args.get(0) + ".gif");
+		event.getChannel().sendMessage(eb.build()).queue();
+	}
 
 }

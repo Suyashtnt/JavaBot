@@ -3,6 +3,7 @@ import commandHandler.Handler;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
+import net.dv8tion.jda.api.requests.GatewayIntent;
 import org.jetbrains.annotations.NotNull;
 
 import javax.security.auth.login.LoginException;
@@ -19,7 +20,7 @@ public class Main extends ListenerAdapter {
 
     public static void main(String[] args) throws LoginException {
 
-        JDABuilder builder = JDABuilder.createDefault(args[0]);
+	    JDABuilder builder = JDABuilder.create(args[0], GatewayIntent.GUILD_MEMBERS, GatewayIntent.DIRECT_MESSAGES, GatewayIntent.GUILD_MESSAGES);
         builder.addEventListeners(new Main());
         builder.addEventListeners(waiter);
         builder.build();
