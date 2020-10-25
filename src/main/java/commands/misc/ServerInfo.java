@@ -12,20 +12,20 @@ import java.util.ArrayList;
 @CommandInfo(name = "serverinfo", usage = "serverinfo", description = "get this servers info")
 public class ServerInfo extends Command {
 
-    @Override
-    protected void execute(@NotNull MessageReceivedEvent event, ArrayList<String> args) {
-        EmbedBuilder eb = new EmbedBuilder();
-        Guild guild = event.getGuild();
-        eb
-                .setTitle("**" + guild.getName() + "**'s Stats")
-                .setThumbnail(guild.getIconUrl())
-                .setDescription("     **ID: `" + guild.getId() + "`**\n" +
-                        "        **Owner: `" + guild.getOwnerId() + "`**\n" +
-                        "        **Members:** " + guild.getMembers().size() + "\n" +
-                        "        **Channels:** " + guild.getChannels().size() + "\n" +
-                        "        **Roles:** " + guild.getRoles().size() + "\n" +
-                        "        **Region: `" + guild.getRegion().getName() + "`**\n" +
-                        "        **Large Server?: `Not implemented`**");
-        event.getChannel().sendMessage(eb.build()).queue();
-    }
+	@Override
+	protected void execute(@NotNull MessageReceivedEvent event, ArrayList<String> args) {
+		EmbedBuilder eb = new EmbedBuilder();
+		Guild guild = event.getGuild();
+		eb
+				.setTitle("**" + guild.getName() + "**'s Stats")
+				.setThumbnail(guild.getIconUrl())
+				.setDescription("     **ID: `" + guild.getId() + "`**\n" +
+						"        **Owner: `" + guild.getOwnerId() + "`**\n" +
+						"        **Members:** " + guild.getMembers().size() + "\n" +
+						"        **Channels:** " + guild.getChannels().size() + "\n" +
+						"        **Roles:** " + guild.getRoles().size() + "\n" +
+						"        **Region: `" + guild.getRegion().getName() + "`**\n" +
+						"        **Large Server?: `Not implemented`**");
+		event.getChannel().sendMessage(eb.build()).queue();
+	}
 }

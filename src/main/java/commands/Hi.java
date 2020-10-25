@@ -9,9 +9,9 @@ import java.util.ArrayList;
 
 @CommandInfo(name = "hi", description = "says hi", usage = "hi")
 public class Hi extends Command {
-    @Override
-    protected void execute(@NotNull MessageReceivedEvent event, ArrayList<String> args) {
-        event.getChannel().sendMessage("hello, " + event.getAuthor().getAsTag()).queue();
-    }
+	@Override
+	protected void execute(@NotNull MessageReceivedEvent event, ArrayList<String> args) {
+		event.getChannel().sendMessage("hello, " + event.getAuthor().getAsTag()).queue();
+	}
 
 }

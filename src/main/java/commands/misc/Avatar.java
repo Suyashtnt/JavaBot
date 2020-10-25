@@ -11,14 +11,14 @@ import java.util.ArrayList;
 @CommandInfo(name = {"avatar", "av", "pfp", "profilepic"}, usage = "avatar", description = "get your avatar and the url")
 public class Avatar extends Command {
 
-    @Override
-    protected void execute(@NotNull MessageReceivedEvent event, ArrayList<String> args) {
-        EmbedBuilder eb = new EmbedBuilder();
-        eb
-                .setTitle("**" + event.getAuthor().getName() + "'s avatar**")
-                .setDescription("**ID: **" + event.getAuthor().getId())
-                .setImage(event.getAuthor().getAvatarUrl())
-                .setColor(0x7289da);
-        event.getChannel().sendMessage(eb.build()).queue();
-    }
+	@Override
+	protected void execute(@NotNull MessageReceivedEvent event, ArrayList<String> args) {
+		EmbedBuilder eb = new EmbedBuilder();
+		eb
+				.setTitle("**" + event.getAuthor().getName() + "'s avatar**")
+				.setDescription("**ID: **" + event.getAuthor().getId())
+				.setImage(event.getAuthor().getAvatarUrl())
+				.setColor(0x7289da);
+		event.getChannel().sendMessage(eb.build()).queue();
+	}
 }

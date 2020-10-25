@@ -10,9 +10,9 @@ import java.util.ArrayList;
 @CommandInfo(name = "say", description = "the bot will say what you type", usage = "say something to say")
 public class Say extends Command {
 
-    @Override
-    protected void execute(@NotNull MessageReceivedEvent event, ArrayList<String> args) {
+	@Override
+	protected void execute(@NotNull MessageReceivedEvent event, ArrayList<String> args) {
 
-        event.getChannel().sendMessage(String.join(" ", args)).queue();
-    }
+		event.getChannel().sendMessage(String.join(" ", args)).queue();
+	}
 }

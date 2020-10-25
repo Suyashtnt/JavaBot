@@ -17,7 +17,7 @@ public class Handler {
     Reflections reflections = new Reflections(path);
     Set<Class<? extends Command>> classes = reflections.getSubTypesOf(Command.class);
 
-    public Handler(String locationOfCommands, String commandPrefix) throws InstantiationException, IllegalAccessException {
+    public Handler(String locationOfCommands, String commandPrefix) {
         prefix = commandPrefix;
         path = locationOfCommands;
 
