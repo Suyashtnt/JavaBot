@@ -1,19 +1,17 @@
-package commands.misc;
+package commands.misc
 
-import com.jagrosh.jdautilities.commons.waiter.EventWaiter;
-import com.jagrosh.jdautilities.doc.standard.CommandInfo;
-import commandHandler.Command;
-import net.dv8tion.jda.api.EmbedBuilder;
-import net.dv8tion.jda.api.entities.Member;
-import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
-import org.jetbrains.annotations.NotNull;
+import com.jagrosh.jdautilities.commons.waiter.EventWaiter
+import com.jagrosh.jdautilities.doc.standard.CommandInfo
+import commandHandler.Command
+import net.dv8tion.jda.api.EmbedBuilder
+import net.dv8tion.jda.api.entities.Member
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent
+import java.util.*
+import kotlin.math.floor
 
-import java.util.ArrayList;
-
-@CommandInfo(name = "kiss", description = "kiss someone", usage = "kiss @someone")
-public class Kiss extends Command {
-
-	String[] images = {
+@CommandInfo(name = ["kiss"], description = "kiss someone", usage = "kiss @someone")
+class Kiss constructor(waiter: EventWaiter?) : Command(waiter) {
+    var images: Array<String> = arrayOf(
 			"https://media1.tenor.com/images/289ec1f0b0ee5163758122ed5fc1cb20/tenor.gif",
 			"https://media1.tenor.com/images/f102a57842e7325873dd980327d39b39/tenor.gif",
 			"https://media1.tenor.com/images/ea9a07318bd8400fbfbd658e9f5ecd5d/tenor.gif",
@@ -36,34 +34,31 @@ public class Kiss extends Command {
 			"https://media1.tenor.com/images/f5167c56b1cca2814f9eca99c4f4fab8/tenor.gif",
 			"https://media1.tenor.com/images/a9100d75d9edbc2c17219dddc96d179d/tenor.gif",
 			"https://media1.tenor.com/images/a1f7d43752168b3c1dbdfb925bda8a33/tenor.gif"
-	};
+	)
 
-	public Kiss(EventWaiter waiter) {
-		super(waiter);
-	}
-
-
-	@Override
-	protected void execute(@NotNull MessageReceivedEvent event, ArrayList<String> args) throws Exception {
-		EmbedBuilder eb = new EmbedBuilder();
-
-		int rand = (int) Math.floor(Math.random() * images.length);
-		String randomImage = images[rand];
-
-		Member Mentioned = event.getMessage().getMentionedMembers().get(0);
-		if (Mentioned == null) {
-			eb.setTitle("uhhhh")
-					.setDescription("Please mention someone to kiss!");
-		} else if (Mentioned == event.getMember()) {
-			eb.setTitle("uhhhh")
-					.setDescription("Are you _that_ lonely? Please mention someone to kiss!");
-		} else {
-			eb
-					.setTitle("**Kiss 💋**")
-					.setDescription("**" + event.getAuthor().getName() + "** kissed **" + Mentioned.getEffectiveName() + "**")
-					.setImage(randomImage)
-					.setColor(0xe889e0);
-		}
-		event.getChannel().sendMessage(eb.build()).queue();
-	}
+    @Throws(Exception::class)
+    override fun execute(event: MessageReceivedEvent, args: ArrayList<String>) {
+        val eb: EmbedBuilder = EmbedBuilder()
+        val rand: Int = floor(Math.random() * images.size).toInt()
+        val randomImage: String = images[rand]
+        val mentioned: Member? = event.message.mentionedMembers[0]
+        when {
+            mentioned == null -> {
+                eb.setTitle("uhhhh")
+                        .setDescription("Please mention someone to kiss!")
+            }
+            mentioned === event.member -> {
+                eb.setTitle("uhhhh")
+                        .setDescription("Are you _that_ lonely? Please mention someone to kiss!")
+            }
+            else -> {
+                eb
+                        .setTitle("**Kiss 💋**")
+                        .setDescription("**" + event.author.name + "** kissed **" + mentioned.effectiveName + "**")
+                        .setImage(randomImage)
+                        .setColor(0xe889e0)
+            }
+        }
+        event.channel.sendMessage(eb.build()).queue()
+    }
 }
