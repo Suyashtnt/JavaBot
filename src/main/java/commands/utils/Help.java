@@ -13,16 +13,16 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 
 @CommandInfo(name = {"help", "h"}, description = "help command", usage = "help commandname")
-public class help extends Command {
+public class Help extends Command {
 	public ArrayList<Command> cmds = new ArrayList<>();
 	EmbedBuilder mainEmbed = new EmbedBuilder();
 	Reflections reflections = new Reflections("commands");
 	Set<Class<? extends Command>> classes = reflections.getSubTypesOf(Command.class);
 
-	public help(EventWaiter waiter) throws InstantiationException, IllegalAccessException, NoSuchMethodException, InvocationTargetException {
+	public Help(EventWaiter waiter) throws InstantiationException, IllegalAccessException, NoSuchMethodException, InvocationTargetException {
 		super(waiter);
 		for (Class<? extends Command> cmd : classes) {
-			if ((cmd.getAnnotation(CommandInfo.class).name())[0].equals("help")) continue;
+			if ((cmd.getAnnotation(CommandInfo.class).name())[0].equals("Help")) continue;
 			Constructor<? extends Command> commandConstructor = cmd.getConstructor(EventWaiter.class);
 			Command classInstance = commandConstructor.newInstance(waiter);
 			cmds.add(classInstance);

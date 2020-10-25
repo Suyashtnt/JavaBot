@@ -14,9 +14,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 @CommandInfo(name = "8ball", description = "are you lucky?", usage = "8ball am i cool?")
-public class eight_ball extends Command {
+public class EightBall extends Command {
 
-    public eight_ball(EventWaiter waiter) {
+    public EightBall(EventWaiter waiter) {
         super(waiter);
     }
 

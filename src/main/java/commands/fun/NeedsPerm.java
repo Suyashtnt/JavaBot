@@ -10,8 +10,8 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 
 @CommandInfo(name = "kick", description = "fake kick someone", usage = "kick")
-public class needsPerm extends Command {
-	public needsPerm(EventWaiter waiter) {
+public class NeedsPerm extends Command {
+	public NeedsPerm(EventWaiter waiter) {
 		super(waiter);
 		botPerms = new Permission[]{Permission.KICK_MEMBERS};
 	}

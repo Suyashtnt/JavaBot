@@ -12,9 +12,9 @@ import utils.Utils;
 import java.util.ArrayList;
 
 @CommandInfo(name = "dog", description = "get a dog image and a fact", usage = "dog")
-public class dog extends Command {
+public class Dog extends Command {
 
-    public dog(EventWaiter waiter) {
+    public Dog(EventWaiter waiter) {
         super(waiter);
     }
 

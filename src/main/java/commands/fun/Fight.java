@@ -25,7 +25,7 @@ public class Fight extends Command {
 
 		event.getChannel().sendMessage(event.getMessage().getMentionedMembers().get(0).getAsMention() + ", do you accept?").queue();
 
-		utils.waitForMessage(e -> !e.getMember().getUser().isBot(), e -> {
+		utils.waitForMessage(e -> true, e -> {
 			System.out.println(e.getMessage().getContentRaw());
 			if (event.getMessage().getMentionedMembers().get(0) == e.getMember() && e.getMessage().getContentRaw().equals("yes")) {
 				event.getChannel().sendMessage("3. 2. 1. Fight!").queue();

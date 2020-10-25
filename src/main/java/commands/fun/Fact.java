@@ -11,9 +11,9 @@ import utils.Utils;
 import java.util.ArrayList;
 
 @CommandInfo(name = "fact", usage = "fact", description = "get a random fact")
-public class fact extends Command {
+public class Fact extends Command {
 
-    public fact(EventWaiter waiter) {
+    public Fact(EventWaiter waiter) {
         super(waiter);
     }
 
