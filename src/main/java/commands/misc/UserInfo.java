@@ -1,5 +1,6 @@
 package commands.misc;
 
+import com.jagrosh.jdautilities.doc.standard.CommandInfo;
 import commandHandler.Command;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
@@ -9,10 +10,8 @@ import java.time.OffsetDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
+@CommandInfo(name = "userinfo", description = "get your users info", usage = "userinfo")
 public class UserInfo extends Command {
-    public UserInfo() {
-        commandName = "userinfo";
-    }
 
     @Override
     protected void execute(@NotNull MessageReceivedEvent event, ArrayList<String> args) {

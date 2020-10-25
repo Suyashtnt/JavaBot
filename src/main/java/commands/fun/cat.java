@@ -1,5 +1,6 @@
 package commands.fun;
 
+import com.jagrosh.jdautilities.doc.standard.CommandInfo;
 import commandHandler.Command;
 import kong.unirest.json.JSONObject;
 import net.dv8tion.jda.api.EmbedBuilder;
@@ -9,10 +10,8 @@ import utils.Utils;
 
 import java.util.ArrayList;
 
+@CommandInfo(name = "cat", description = "get a cat image and a fact", usage = "cat")
 public class cat extends Command {
-    public cat() {
-        commandName = "cat";
-    }
 
     @Override
     protected void execute(@NotNull MessageReceivedEvent event, ArrayList<String> args) {

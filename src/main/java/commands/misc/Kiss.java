@@ -1,5 +1,6 @@
 package commands.misc;
 
+import com.jagrosh.jdautilities.doc.standard.CommandInfo;
 import commandHandler.Command;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Member;
@@ -8,6 +9,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
+@CommandInfo(name = "kiss", description = "kiss someone", usage = "kiss @someone")
 public class Kiss extends Command {
 
     String[] images = {
@@ -35,9 +37,6 @@ public class Kiss extends Command {
             "https://media1.tenor.com/images/a1f7d43752168b3c1dbdfb925bda8a33/tenor.gif"
     };
 
-    public Kiss() {
-        commandName = "kiss";
-    }
 
     @Override
     protected void execute(@NotNull MessageReceivedEvent event, ArrayList<String> args) throws Exception {

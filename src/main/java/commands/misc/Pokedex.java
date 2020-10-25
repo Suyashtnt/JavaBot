@@ -1,5 +1,6 @@
 package commands.misc;
 
+import com.jagrosh.jdautilities.doc.standard.CommandInfo;
 import commandHandler.Command;
 import kong.unirest.json.JSONException;
 import kong.unirest.json.JSONObject;
@@ -12,10 +13,8 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+@CommandInfo(name = "pokedex", usage = "pokedex pikachu", description = "gets a pokemon from the pokedex")
 public class Pokedex extends Command {
-    public Pokedex() {
-        commandName = "pokedex";
-    }
 
     @Override
     protected void execute(@NotNull MessageReceivedEvent event, ArrayList<String> args) {

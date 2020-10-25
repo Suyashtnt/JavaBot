@@ -1,5 +1,6 @@
 package commands.misc;
 
+import com.jagrosh.jdautilities.doc.standard.CommandInfo;
 import commandHandler.Command;
 import kong.unirest.HttpResponse;
 import kong.unirest.JsonNode;
@@ -11,13 +12,8 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
-
+@CommandInfo(name = "hug", usage = "hug @someone", description = "hug someone")
 public class Hug extends Command {
-
-    public Hug() {
-        commandName = "hug";
-    }
-
 
     @Override
     protected void execute(@NotNull MessageReceivedEvent event, ArrayList<String> args) throws Exception {

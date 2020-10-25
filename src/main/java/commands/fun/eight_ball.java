@@ -1,5 +1,6 @@
 package commands.fun;
 
+import com.jagrosh.jdautilities.doc.standard.CommandInfo;
 import commandHandler.Command;
 import kong.unirest.json.JSONObject;
 import net.dv8tion.jda.api.EmbedBuilder;
@@ -11,10 +12,8 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+@CommandInfo(name = "8ball", description = "are you lucky?", usage = "8ball am i cool?")
 public class eight_ball extends Command {
-    public eight_ball() {
-        commandName = "8ball";
-    }
 
     @Override
     protected void execute(@NotNull MessageReceivedEvent event, ArrayList<String> args) {
