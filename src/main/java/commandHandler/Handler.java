@@ -1,11 +1,13 @@
 package commandHandler;
 
+import com.jagrosh.jdautilities.commons.waiter.EventWaiter;
 import com.jagrosh.jdautilities.doc.standard.CommandInfo;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import org.jetbrains.annotations.NotNull;
 import org.reflections8.Reflections;
 
+import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Set;
@@ -17,14 +19,15 @@ public class Handler {
     Reflections reflections = new Reflections(path);
     Set<Class<? extends Command>> classes = reflections.getSubTypesOf(Command.class);
 
-    public Handler(String locationOfCommands, String commandPrefix) {
+    public Handler(String locationOfCommands, String commandPrefix, EventWaiter waiter) {
         prefix = commandPrefix;
         path = locationOfCommands;
 
         for (Class<? extends Command> aClass : classes) {
             try {
                 System.out.println("loading " + aClass.getName());
-                Command classInstance = aClass.newInstance();
+                Constructor<? extends Command> commandConstructor = aClass.getConstructor(EventWaiter.class);
+                Command classInstance = commandConstructor.newInstance(waiter);
                 cmds.add(classInstance);
             } catch (Exception e) {
                 e.printStackTrace();

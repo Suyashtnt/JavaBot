@@ -1,5 +1,6 @@
 package commands.fun;
 
+import com.jagrosh.jdautilities.commons.waiter.EventWaiter;
 import com.jagrosh.jdautilities.doc.standard.CommandInfo;
 import commandHandler.Command;
 import kong.unirest.json.JSONObject;
@@ -14,6 +15,10 @@ import java.util.regex.Pattern;
 
 @CommandInfo(name = "8ball", description = "are you lucky?", usage = "8ball am i cool?")
 public class eight_ball extends Command {
+
+    public eight_ball(EventWaiter waiter) {
+        super(waiter);
+    }
 
     @Override
     protected void execute(@NotNull MessageReceivedEvent event, ArrayList<String> args) {

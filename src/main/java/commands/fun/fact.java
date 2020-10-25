@@ -1,5 +1,6 @@
 package commands.fun;
 
+import com.jagrosh.jdautilities.commons.waiter.EventWaiter;
 import com.jagrosh.jdautilities.doc.standard.CommandInfo;
 import commandHandler.Command;
 import kong.unirest.json.JSONObject;
@@ -11,6 +12,10 @@ import java.util.ArrayList;
 
 @CommandInfo(name = "fact", usage = "fact", description = "get a random fact")
 public class fact extends Command {
+
+    public fact(EventWaiter waiter) {
+        super(waiter);
+    }
 
     @Override
     protected void execute(@NotNull MessageReceivedEvent event, ArrayList<String> args) {

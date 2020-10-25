@@ -1,3 +1,4 @@
+import com.jagrosh.jdautilities.commons.waiter.EventWaiter;
 import commandHandler.Handler;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
@@ -10,18 +11,17 @@ public class Main extends ListenerAdapter {
 
     static Handler handler;
 
+    private static final EventWaiter waiter = new EventWaiter();
+
     static {
-        try {
-            handler = new Handler("com.tnt_man_inc.JavaBot2.commands", "!");
-        } catch (InstantiationException | IllegalAccessException e) {
-            e.printStackTrace();
-        }
+        handler = new Handler("com.tnt_man_inc.JavaBot2.commands", "!", waiter);
     }
 
     public static void main(String[] args) throws LoginException {
 
         JDABuilder builder = JDABuilder.createDefault(args[0]);
         builder.addEventListeners(new Main());
+        builder.addEventListeners(waiter);
         builder.build();
     }
 
@@ -33,4 +33,5 @@ public class Main extends ListenerAdapter {
             e.printStackTrace();
         }
     }
+
 }

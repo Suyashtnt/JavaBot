@@ -1,5 +1,6 @@
 package commandHandler;
 
+import com.jagrosh.jdautilities.commons.waiter.EventWaiter;
 import com.jagrosh.jdautilities.doc.standard.CommandInfo;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
@@ -9,6 +10,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Command {
+    public Command(EventWaiter waiter) {
+
+    }
 
     public Permission[] botPerms = {};
     public Permission[] clientPerms = {};

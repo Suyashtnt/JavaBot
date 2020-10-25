@@ -1,5 +1,6 @@
 package commands.misc;
 
+import com.jagrosh.jdautilities.commons.waiter.EventWaiter;
 import com.jagrosh.jdautilities.doc.standard.CommandInfo;
 import commandHandler.Command;
 import net.dv8tion.jda.api.EmbedBuilder;
@@ -12,6 +13,10 @@ import java.util.ArrayList;
 
 @CommandInfo(name = "userinfo", description = "get your users info", usage = "userinfo")
 public class UserInfo extends Command {
+
+	public UserInfo(EventWaiter waiter) {
+		super(waiter);
+	}
 
 	@Override
 	protected void execute(@NotNull MessageReceivedEvent event, ArrayList<String> args) {

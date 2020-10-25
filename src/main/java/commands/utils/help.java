@@ -1,5 +1,6 @@
 package commands.utils;
 
+import com.jagrosh.jdautilities.commons.waiter.EventWaiter;
 import com.jagrosh.jdautilities.doc.standard.CommandInfo;
 import commandHandler.Command;
 import net.dv8tion.jda.api.EmbedBuilder;
@@ -7,6 +8,8 @@ import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import org.jetbrains.annotations.NotNull;
 import org.reflections8.Reflections;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 
 @CommandInfo(name = {"help", "h"}, description = "help command", usage = "help commandname")
@@ -16,10 +19,13 @@ public class help extends Command {
 	Reflections reflections = new Reflections("commands");
 	Set<Class<? extends Command>> classes = reflections.getSubTypesOf(Command.class);
 
-	public help() throws InstantiationException, IllegalAccessException {
+	public help(EventWaiter waiter) throws InstantiationException, IllegalAccessException, NoSuchMethodException, InvocationTargetException {
+		super(waiter);
 		for (Class<? extends Command> cmd : classes) {
 			if ((cmd.getAnnotation(CommandInfo.class).name())[0].equals("help")) continue;
-			cmds.add(cmd.newInstance());
+			Constructor<? extends Command> commandConstructor = cmd.getConstructor(EventWaiter.class);
+			Command classInstance = commandConstructor.newInstance(waiter);
+			cmds.add(classInstance);
 		}
 		for (Command cmd : cmds) {
 			CommandInfo commandInfo = cmd.getClass().getAnnotation(CommandInfo.class);
@@ -33,7 +39,7 @@ public class help extends Command {
 	}
 
 	@Override
-	protected void execute(@NotNull MessageReceivedEvent event, ArrayList<String> args) throws Exception {
+	protected void execute(@NotNull MessageReceivedEvent event, ArrayList<String> args) {
 		if (!args.isEmpty()) {
 			EmbedBuilder customHelp = new EmbedBuilder();
 			CommandInfo commandInfo = null;

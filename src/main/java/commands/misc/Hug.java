@@ -1,5 +1,6 @@
 package commands.misc;
 
+import com.jagrosh.jdautilities.commons.waiter.EventWaiter;
 import com.jagrosh.jdautilities.doc.standard.CommandInfo;
 import commandHandler.Command;
 import kong.unirest.HttpResponse;
@@ -15,8 +16,12 @@ import java.util.ArrayList;
 @CommandInfo(name = "hug", usage = "hug @someone", description = "hug someone")
 public class Hug extends Command {
 
+    public Hug(EventWaiter waiter) {
+        super(waiter);
+    }
+
     @Override
-    protected void execute(@NotNull MessageReceivedEvent event, ArrayList<String> args) throws Exception {
+    protected void execute(@NotNull MessageReceivedEvent event, ArrayList<String> args) {
         EmbedBuilder eb = new EmbedBuilder();
         HttpResponse<JsonNode> httpResponse = Unirest.get("https://nekos.life/api/v2/img/hug")
                 .asJson();

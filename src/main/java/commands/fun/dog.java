@@ -1,5 +1,6 @@
 package commands.fun;
 
+import com.jagrosh.jdautilities.commons.waiter.EventWaiter;
 import com.jagrosh.jdautilities.doc.standard.CommandInfo;
 import commandHandler.Command;
 import kong.unirest.json.JSONObject;
@@ -12,6 +13,10 @@ import java.util.ArrayList;
 
 @CommandInfo(name = "dog", description = "get a dog image and a fact", usage = "dog")
 public class dog extends Command {
+
+    public dog(EventWaiter waiter) {
+        super(waiter);
+    }
 
     @Override
     protected void execute(@NotNull MessageReceivedEvent event, ArrayList<String> args) {

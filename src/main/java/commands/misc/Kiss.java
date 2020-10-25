@@ -1,5 +1,6 @@
 package commands.misc;
 
+import com.jagrosh.jdautilities.commons.waiter.EventWaiter;
 import com.jagrosh.jdautilities.doc.standard.CommandInfo;
 import commandHandler.Command;
 import net.dv8tion.jda.api.EmbedBuilder;
@@ -36,6 +37,10 @@ public class Kiss extends Command {
 			"https://media1.tenor.com/images/a9100d75d9edbc2c17219dddc96d179d/tenor.gif",
 			"https://media1.tenor.com/images/a1f7d43752168b3c1dbdfb925bda8a33/tenor.gif"
 	};
+
+	public Kiss(EventWaiter waiter) {
+		super(waiter);
+	}
 
 
 	@Override
