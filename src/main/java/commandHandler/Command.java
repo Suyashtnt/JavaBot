@@ -16,6 +16,7 @@ public class Command {
 
     public Permission[] botPerms = {};
     public Permission[] clientPerms = {};
+    public int cooldown = 0;
 
     protected void execute(@NotNull MessageReceivedEvent event, ArrayList<String> args) throws Exception {
         System.out.println("running " + Arrays.toString(this.getClass().getAnnotation(CommandInfo.class).name()));

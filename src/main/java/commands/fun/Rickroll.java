@@ -15,6 +15,7 @@ import java.util.stream.Collectors;
 public class Rickroll extends Command {
 	public Rickroll(EventWaiter waiter) {
 		super(waiter);
+		cooldown = 5 * 1000 * 60;
 	}
 
 	@Override

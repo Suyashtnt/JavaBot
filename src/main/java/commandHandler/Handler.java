@@ -8,19 +8,25 @@ import org.jetbrains.annotations.NotNull;
 import org.reflections8.Reflections;
 
 import java.lang.reflect.Constructor;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Set;
+import java.util.*;
 
 public class Handler {
 	public String prefix;
 	public String path = "";
 	public ArrayList<Command> cmds = new ArrayList<>();
 	Reflections reflections = new Reflections(path);
-	Set<Class<? extends Command>> classes = reflections.getSubTypesOf(Command.class);
 
-	public Handler(String locationOfCommands, String commandPrefix, EventWaiter waiter) {
+	Timer timer = new Timer();
+
+	Set<Class<? extends Command>> classes = reflections.getSubTypesOf(Command.class);
+	HashMap<String, String> cooldownTimes = new HashMap<String, String>() {
+		@Override
+		public int size() {
+			return 50;
+		}
+	};
+
+	public Handler(@NotNull String locationOfCommands, @NotNull String commandPrefix, @NotNull EventWaiter waiter) {
 		prefix = commandPrefix;
 		path = locationOfCommands;
 
@@ -41,6 +47,7 @@ public class Handler {
 		if (event.getAuthor().isBot()) return;
 
 		System.out.println("We received a message that contains: " + event.getMessage().getContentDisplay());
+
 
 
 		for (Command cmd : cmds) {
@@ -66,11 +73,23 @@ public class Handler {
 							return;
 						}
 					}
-
+					System.out.println("here");
+					if (cooldownTimes.containsKey(event.getAuthor().getId()) && cooldownTimes.containsValue((cmd.getClass().getAnnotation(CommandInfo.class).name())[0])) {
+						event.getChannel().sendMessage("sorry but you are on time cooldown").queue();
+						return;
+					}
 					ArrayList<String> args = new ArrayList<>();
 					Collections.addAll(args, Arrays.copyOfRange(split, 1, split.length));
 
 					cmd.execute(event, args);
+					cooldownTimes.put(event.getAuthor().getId(), (cmd.getClass().getAnnotation(CommandInfo.class).name())[0]);
+
+					timer.schedule(new TimerTask() {
+						@Override
+						public void run() {
+							cooldownTimes.remove(event.getAuthor().getId(), (cmd.getClass().getAnnotation(CommandInfo.class).name())[0]);
+						}
+					}, cmd.cooldown);
 					break;
 				}
 			}
