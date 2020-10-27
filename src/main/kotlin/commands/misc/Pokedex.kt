@@ -2,6 +2,7 @@ package commands.misc
 
 import com.jagrosh.jdautilities.commons.waiter.EventWaiter
 import com.jagrosh.jdautilities.doc.standard.CommandInfo
+import com.mongodb.client.MongoClient
 import commandHandler.Command
 import kong.unirest.json.JSONException
 import kong.unirest.json.JSONObject
@@ -13,8 +14,8 @@ import java.util.regex.Matcher
 import java.util.regex.Pattern
 
 @CommandInfo(name = ["pokedex"], usage = "pokedex pikachu", description = "gets a pokemon from the pokedex")
-class Pokedex constructor(waiter: EventWaiter?) : Command(waiter) {
-    override fun execute(event: MessageReceivedEvent, args: ArrayList<String>) {
+class Pokedex constructor(waiter: EventWaiter?, mongoClient: MongoClient) : Command(waiter, mongoClient) {
+    override suspend fun execute(event: MessageReceivedEvent, args: ArrayList<String>) {
         val eb = EmbedBuilder()
         val httpResponse: JSONObject? = Utils().getObject("https://some-random-api.ml/pokedex?pokemon=" + args[0])
         val mainName: String = httpResponse!!.getString("name")
@@ -55,5 +56,9 @@ class Pokedex constructor(waiter: EventWaiter?) : Command(waiter) {
 """))
                 .setThumbnail("https://i.some-random-api.ml/pokemon/" + args[0] + ".gif")
         event.channel.sendMessage(eb.build()).queue()
+    }
+
+    init {
+
     }
 }

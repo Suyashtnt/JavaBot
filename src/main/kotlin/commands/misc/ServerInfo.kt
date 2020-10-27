@@ -2,6 +2,7 @@ package commands.misc
 
 import com.jagrosh.jdautilities.commons.waiter.EventWaiter
 import com.jagrosh.jdautilities.doc.standard.CommandInfo
+import com.mongodb.client.MongoClient
 import commandHandler.Command
 import net.dv8tion.jda.api.EmbedBuilder
 import net.dv8tion.jda.api.entities.Guild
@@ -9,8 +10,8 @@ import net.dv8tion.jda.api.events.message.MessageReceivedEvent
 import java.util.*
 
 @CommandInfo(name = ["serverinfo"], usage = "serverinfo", description = "get this servers info")
-class ServerInfo constructor(waiter: EventWaiter?) : Command(waiter) {
-    override fun execute(event: MessageReceivedEvent, args: ArrayList<String>) {
+class ServerInfo constructor(waiter: EventWaiter?, mongoClient: MongoClient) : Command(waiter, mongoClient) {
+    override suspend fun execute(event: MessageReceivedEvent, args: ArrayList<String>) {
         val eb = EmbedBuilder()
         val guild: Guild = event.guild
         eb
@@ -24,5 +25,9 @@ class ServerInfo constructor(waiter: EventWaiter?) : Command(waiter) {
                         "        **Region: `" + guild.region.getName() + "`**\n" +
                         "        **Large Server?: `Not implemented`**"))
         event.channel.sendMessage(eb.build()).queue()
+    }
+
+    init {
+
     }
 }
